@@ -3,7 +3,7 @@
     "type": "module",
     "scripts": {
         "build": "vue-tsc && vite build",
-        "dev": "vite"
+        "dev": "vite --host laravel-vue.test --port 5174"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
@@ -19,5 +19,14 @@
         "vite": "^5.0",
         "vue": "^3.4.0",
         "vue-tsc": "^2.0.24"
+    },
+    "dependencies": {
+        "@vueuse/core": "^11.3.0",
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.1",
+        "lucide-vue-next": "^0.460.0",
+        "radix-vue": "^1.9.10",
+        "tailwind-merge": "^2.5.4",
+        "tailwindcss-animate": "^1.0.7"
     }
 }
