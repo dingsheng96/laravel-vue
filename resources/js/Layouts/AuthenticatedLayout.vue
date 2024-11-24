@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { CircleUser } from "lucide-vue-next";
+import { CircleUser, Home } from "lucide-vue-next";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 
 // Import components from the custom library
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/Components/ui/separator";
 import {
     Sidebar,
     SidebarContent,
@@ -20,7 +20,7 @@ import {
     SidebarProvider,
     SidebarRail,
     SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from "@/Components/ui/sidebar";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -28,14 +28,33 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/Components/ui/dropdown-menu";
 
 const data = {
     navMain: [
         {
             title: "Getting Started",
             url: "#",
-            items: [{ title: "Dashboard", url: "#" }],
+            items: [
+                {
+                    title: "Dashboard",
+                    url: route("dashboard"),
+                    isActive: route().current() === "dashboard",
+                    icon: Home,
+                },
+            ],
+        },
+        {
+            title: "App",
+            url: "#",
+            items: [
+                {
+                    title: "Users",
+                    url: route("users.index"),
+                    isActive: route().current() === "users",
+                    icon: CircleUser,
+                },
+            ],
         },
     ],
 };
@@ -73,12 +92,13 @@ const data = {
                                 :key="subItem.title"
                             >
                                 <SidebarMenuButton
-                                    :class="{ 'is-active': subItem.isActive }"
+                                    :isActive="subItem.isActive"
                                     as-child
                                 >
-                                    <a :href="subItem.url">{{
-                                        subItem.title
-                                    }}</a>
+                                    <a :href="subItem.url"
+                                        ><component :is="subItem.icon" />
+                                        <span>{{ subItem.title }}</span></a
+                                    >
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         </SidebarMenu>
@@ -106,12 +126,14 @@ const data = {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuLabel>
+                                <Link :href="route('profile.edit')"
+                                    >My Account</Link
+                                >
+                            </DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
-                                <Link
-                                    v-bind:href="route('logout')"
-                                    method="post"
+                                <Link :href="route('logout')" method="post"
                                     >Logout</Link
                                 >
                             </DropdownMenuItem>
