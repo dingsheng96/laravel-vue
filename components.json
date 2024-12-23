@@ -12,7 +12,7 @@
     },
     "framework": "laravel",
     "aliases": {
-        "components": "@/Components",
+        "components": "@/components",
         "utils": "@/lib/utils"
     }
 }

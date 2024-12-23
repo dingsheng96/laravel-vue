@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { CircleUser, Home } from "lucide-vue-next";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import ApplicationLogo from "@/components/ApplicationLogo.vue";
 import { Link, router } from "@inertiajs/vue3";
 
 // Import components from the custom library
-import { Separator } from "@/Components/ui/separator";
+import { Separator } from "@/components/ui/separator";
 import {
     Sidebar,
     SidebarContent,
@@ -20,7 +20,7 @@ import {
     SidebarProvider,
     SidebarRail,
     SidebarTrigger,
-} from "@/Components/ui/sidebar";
+} from "@/components/ui/sidebar";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -28,7 +28,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/Components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 
 const data = {
     navMain: [
@@ -62,11 +62,14 @@ const data = {
 
 <template>
     <SidebarProvider>
-        <Sidebar>
+        <Sidebar collapsible="icon">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <div class="flex items-center gap-2">
+                        <SidebarMenuButton
+                            size="lg"
+                            class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                        >
                             <div
                                 class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground"
                             >
@@ -77,7 +80,7 @@ const data = {
                             <div class="flex flex-col gap-0.5 leading-none">
                                 <span class="font-semibold">Laravel Vue</span>
                             </div>
-                        </div>
+                        </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarHeader>
@@ -96,7 +99,10 @@ const data = {
                                     as-child
                                 >
                                     <a :href="subItem.url"
-                                        ><component :is="subItem.icon" />
+                                        ><component
+                                            :is="subItem.icon"
+                                            class="size-4 shrink-0"
+                                        />
                                         <span>{{ subItem.title }}</span></a
                                     >
                                 </SidebarMenuButton>
